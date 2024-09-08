@@ -3,6 +3,7 @@ import { dbconnection } from "./database/dbconnection.js";
 import dotenv from "dotenv";
 import messageRouter from "./router/messageRouter.js";
 import cors from "cors";
+import { Message } from "./models/messageSchema.js";
 
 const app = express();
 
@@ -19,6 +20,12 @@ app.use(
 app.use(express.json());
 app.use(express.urlencoded({extended:true}));
 
+app.get("/", (req, res) => {
+    res.json({
+        success: true,
+        Message: "My first MERN stack project is Done.",
+    });
+});
 app.use("/api/v1/message",messageRouter);
 
 dbconnection();
